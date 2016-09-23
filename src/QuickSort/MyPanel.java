@@ -4,7 +4,7 @@ import java.awt.Color;
 import java.awt.Graphics;
 import javax.swing.JPanel;
 
-public class myPanel extends JPanel {
+public class MyPanel extends JPanel {
 
     @Override
     public void paintComponent(Graphics gr) {

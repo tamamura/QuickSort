@@ -26,7 +26,7 @@ public class Main {
         frame.setUndecorated(true);
         
         //создание панели (background)
-        myPanel panel = new myPanel();
+        MyPanel panel = new MyPanel();
         panel.setLayout(null);
         /*JButton but = new JButton("5");
         but.setSize(50, 30);
