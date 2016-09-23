@@ -1,46 +1,50 @@
-
 package QuickSort;
 
 import java.util.Random;
 
 public class QuickSort {
     
-    static int arrLenght = 100;
-    static int i, j, m, a = 0, delay = 0;
-    static int[] array = new int[arrLenght];
-    static Random generator = new Random();
+    public int i = 0, j = 99, m = 49, a = 0, delay = 1, bingo = 0;
+    public int[] array = new int[100];
+    public int[] saveArray = new int[100];
+    Random generator = new Random();
+    
+    MyPanel panel = new MyPanel();
 
-    static void initArray() {
-        for (int k = 0; k < arrLenght; k++)
+    void initArray() {
+        for (int k = 0; k < 100; k++){
             array[k] = generator.nextInt(90)+10;
+            saveArray[k] = array[k];
+        }
     }
 
-    static void printArray() {
-        for (int k = 0; k < arrLenght; k++)
+    void printArray() {
+        for (int k = 0; k < 100; k++)
             System.out.print(array[k] + " ");
         System.out.println();
     }
 
-    static void quickSort() throws InterruptedException {
+    void quickSort() throws InterruptedException {
         int startIndex = 0;
-        int endIndex = arrLenght - 1;
+        int endIndex = 99;
         doSort(startIndex, endIndex);
     }
 
-    static void doSort(int start, int end) throws InterruptedException {
+    void doSort(int start, int end) throws InterruptedException {
         if (start >= end) return;
         
         i = start;
         j = end;
         m = (i + j) / 2;
         while (i < j) {
-            while ((array[i] <= array[m]) && i < m) {i++; a++; Thread.sleep(delay);}
-            while ((array[m] <= array[j]) && j > m) {j--; a++; Thread.sleep(delay);}
+            while ((array[i] <= array[m]) && i < m) {i++; a++; Thread.sleep(delay); Main.repaint();}
+            while ((array[m] <= array[j]) && j > m) {j--; a++; Thread.sleep(delay); Main.repaint();}
             if (i < j) {
                 int temp = array[i];
                 array[i] = array[j];
                 array[j] = temp;
                 Thread.sleep(delay);
+                Main.repaint(); 
                 a++;
                 if (i == m) 
                     m = j;
@@ -52,9 +56,8 @@ public class QuickSort {
         doSort(m + 1, end);
     }
     
-    static void checkArray() {
-        int bingo = 0;
-        for (int k = 0; k < arrLenght - 1; k++) 
+    void checkArray() {
+        for (int k = 0; k < 99; k++) 
             if (array[k] > array[k+1]) {
                 System.out.println("Ошибка в " + (k+1) + " элементе");
                 bingo = 1;
@@ -62,6 +65,8 @@ public class QuickSort {
         if (bingo == 0) {
             System.out.println("Сортировка выполнена успешно.");
             System.out.println("Было совершено " + a + " перестановок.");
+            bingo = 2;
+            Main.repaint();
         }
     }
 }
