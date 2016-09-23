@@ -1,6 +1,5 @@
 package QuickSort;
 
-import java.awt.Font;
 import java.awt.event.ActionEvent;
 import java.awt.event.ActionListener;
 import java.util.logging.Level;
@@ -16,12 +15,8 @@ public class Main {
 
     public static void main(String[] args) {
         
-        // play/pause не меняется без "final"
-        final String play = "Play";
-        final String pause = "Pause";
-        final JButton buttonStart = new JButton("Start sorting");
-        buttonStart.setVisible(true);
         
+        final JButton buttonPlay = new JButton();
         sort = new QuickSort();
         sort.initArray();
         sort.printArray();
@@ -45,7 +40,7 @@ public class Main {
                 sort.initArray();
                 sort.printArray();
                 setDefaultValue();
-                buttonStart.setVisible(true);
+                buttonPlay.setText("Sort");
                 repaint();
             }
         });
@@ -65,16 +60,23 @@ public class Main {
         panel.add(button);
         
         //button play/pause
-        final JButton buttonPlay = new JButton();
-        buttonPlay.setText("Pause");
+        buttonPlay.setText("Sort");
         play();
         buttonPlay.addActionListener(new ActionListener(){
             public void actionPerformed(ActionEvent e){
-                if (buttonPlay.getText().equals(play)){
-                    buttonPlay.setText(pause);
+                if (buttonPlay.getText().equals("Sort")) {
+                    buttonPlay.setText("Pause");
+                    play();
+                    try {
+                        sort.quickSort();
+                    } catch (InterruptedException ex) {
+                        Logger.getLogger(Main.class.getName()).log(Level.SEVERE, null, ex);
+                    }
+                } else if (buttonPlay.getText().equals("Play")){
+                    buttonPlay.setText("Pause");
                     play();
                 } else {
-                    buttonPlay.setText(play);
+                    buttonPlay.setText("Play");
                     pause();
                 }
             }
@@ -111,6 +113,7 @@ public class Main {
             public void actionPerformed(ActionEvent e){
                 start();
                 setDefaultValue();
+                buttonPlay.setText("Sort");
                 repaint();
             }
         });
@@ -125,39 +128,17 @@ public class Main {
                 start();
                 setDefaultValue();
                 sort.delay = 0;
-                buttonStart.setVisible(false);
                 try {
                     sort.quickSort();
                 } catch (InterruptedException ex) {
                     Logger.getLogger(Main.class.getName()).log(Level.SEVERE, null, ex);
                 }
-                sort.printArray();
-                sort.checkArray();
                 repaint();
             }
         });
         button.setSize(70, 30);
         button.setLocation(575, 545);
         panel.add(button);
-        
-        //button start sorting
-        buttonStart.addActionListener(new ActionListener(){
-            public void actionPerformed(ActionEvent e){
-                buttonStart.setVisible(false);
-                try {
-                    sort.quickSort();
-                } catch (InterruptedException ex) {
-                    Logger.getLogger(Main.class.getName()).log(Level.SEVERE, null, ex);
-                }
-                sort.printArray();
-                sort.checkArray();
-                repaint();
-            }
-        });
-        buttonStart.setSize(200, 50);
-        buttonStart.setFont(new Font("Arial", Font.PLAIN, 30));
-        buttonStart.setLocation(350, 235);
-        panel.add(buttonStart);
         
         frame.setVisible(true);
     }

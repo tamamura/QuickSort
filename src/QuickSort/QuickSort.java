@@ -28,6 +28,8 @@ public class QuickSort {
         int startIndex = 0;
         int endIndex = 99;
         doSort(startIndex, endIndex);
+        checkArray();
+        printArray();
     }
 
     void doSort(int start, int end) throws InterruptedException {
