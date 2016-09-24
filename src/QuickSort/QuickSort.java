@@ -4,7 +4,7 @@ import java.util.Random;
 
 public class QuickSort {
     
-    public int i = 0, j = 99, m = 49, bingo = 0, delay = 512, st = 0, en = 99;
+    public int i = 0, j = 99, m = 49, bingo = 0, delay = 128, st = 0, en = 99;
     static int breakSortToggle = 0;
     public int[] array = new int[100];
     public int[] saveArray = new int[100];
