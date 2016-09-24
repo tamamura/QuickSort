@@ -28,6 +28,11 @@ public class MyPanel extends JPanel {
     @Override
     public void paintComponent(Graphics gr) {
         
+        //отрисовка области
+        if (sort.bingo != 2) {
+        gr.setColor(new Color(0xCCCCCC));
+        gr.fillRect(89 + sort.st * 8, 0, (sort.en - sort.st + 1) * 8, 520);
+        }
         
         for (int i = 0; i < 100; i++){
             
@@ -41,19 +46,19 @@ public class MyPanel extends JPanel {
             
             if (sort.bingo != 2) {
                 //элемент "i"
-                if (sort.array[sort.i] > sort.array[sort.m]) gr.setColor(Color.RED);
-                else  gr.setColor(Color.GREEN);
+                if (sort.array[sort.i] > sort.array[sort.m]) gr.setColor(new Color(0xDD2222));
+                else  gr.setColor(new Color(0x22DD22));
                 gr.fillRect(90 + sort.i*8, 520 - 5 * sort.array[sort.i] + 6, 6, 5 * sort.array[sort.i] - 6); 
             
                 //элемент "j"
-                if (sort.array[sort.j] < sort.array[sort.m]) gr.setColor(Color.RED);
-                else gr.setColor(Color.GREEN);
+                if (sort.array[sort.j] < sort.array[sort.m]) gr.setColor(new Color(0xDD2222));
+                else gr.setColor(new Color(0x22DD22));
                 gr.fillRect(90 + sort.j*8, 520 - 5 * sort.array[sort.j] + 6, 6, 5 * sort.array[sort.j] - 6);
             
                 //точка опоры "m"
-                gr.setColor(Color.BLUE);
+                gr.setColor(new Color(0x2222DD));
                 gr.fillRect(90 + sort.m*8, 520 - 5 * sort.array[sort.m] + 6, 6, 5 * sort.array[sort.m] - 6);
-                gr.fillRect(80, 520 - 5 * sort.array[sort.m], 820, 1);
+                gr.fillRect(89 + sort.st * 8, 520 - 5 * sort.array[sort.m], (sort.en - sort.st + 1) * 8, 1);
             }
         }
         
